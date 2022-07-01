@@ -377,7 +377,7 @@ public class DefaultRequestCoordinator extends AbstractRequestCoordinator implem
                 redirectURL = responseWrapper.getRedirectURL();
             }
             if (responseWrapper.isWrappedByFramework()) {
-                response.sendRedirect(redirectURL);
+                    response.sendRedirect(redirectURL);
             } else {
                 responseWrapper.sendRedirect(redirectURL);
             }

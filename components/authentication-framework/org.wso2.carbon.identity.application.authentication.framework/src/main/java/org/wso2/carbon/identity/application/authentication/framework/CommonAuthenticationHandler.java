@@ -19,6 +19,7 @@
 package org.wso2.carbon.identity.application.authentication.framework;
 
 import org.wso2.carbon.identity.application.authentication.framework.config.ConfigurationFacade;
+import org.wso2.carbon.identity.application.authentication.framework.handler.request.impl.DemoRequestCoordinator;
 import org.wso2.carbon.identity.application.authentication.framework.util.FrameworkUtils;
 
 import java.io.IOException;
@@ -43,7 +44,10 @@ public class CommonAuthenticationHandler {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        if (DemoRequestCoordinator.isInitialDemoFlow(request)) {
+            DemoRequestCoordinator.getInstance().handle(request, response, false);
+            return;
+        }
         if (FrameworkUtils.getMaxInactiveInterval() == 0) {
             FrameworkUtils.setMaxInactiveInterval(request.getSession().getMaxInactiveInterval());
         }
